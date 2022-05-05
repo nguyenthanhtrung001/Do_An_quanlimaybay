@@ -105,6 +105,7 @@ void Chon_chucnang(){
 								}
 							}
 							if (j==13){
+								
         						Xoa_chucnang(x,11,s);
         						xoa_gt(1);
         						//Lenh khi chon bang phim ENTER
@@ -117,6 +118,8 @@ void Chon_chucnang(){
 									SetBGColor(11);
 									cout<<"So luong may bay :   ";
 									ShowConsoleCursor(true);
+									
+									
 									while(true){
 										do{
 											ktra =0;
@@ -167,16 +170,18 @@ void Chon_chucnang(){
 							//f2: hieu chinh chuyen bay
 							if (j == 60)
 							{
-								Xoa_chucnang(x, 11, s);
+								Xoa_chucnang(x, 17, s);
 								xoa_gt(1);
 								edit_chuyen_bay(phead_dscb);
-								goto chuc_nang;
+								goto chuc_nang2;
+								
 							}
 							// f3 : dat ve
 							if (j == 61)
 							{
 								Xoa_chucnang(x, 11, s);
 								xoa_gt(1);
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								update_statement(phead_dscb);
 								in_ten_chuyen_bay(phead_dscb);
@@ -244,7 +249,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 11, s);
 								xoa_gt(1);
-								
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								in_ten_chuyen_bay(phead_dscb);
 								do {
@@ -285,7 +290,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 11, s);
 								xoa_gt(1);
-								
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								in_ten_chuyen_bay(phead_dscb);
 								do {
@@ -462,6 +467,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 17, s);
 								xoa_gt(1);
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								update_statement(phead_dscb);
 								in_ten_chuyen_bay(phead_dscb);
@@ -529,7 +535,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 17, s);
 								xoa_gt(1);
-
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								in_ten_chuyen_bay(phead_dscb);
 								do {
@@ -570,7 +576,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 17, s);
 								xoa_gt(1);
-
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								in_ten_chuyen_bay(phead_dscb);
 								do {
@@ -647,6 +653,7 @@ void Chon_chucnang(){
         						SetBGColor(15);
         						SetColor(0);
         						if (y==3) {
+									if(thong_bao_DSCB_0(phead_dscb)) break;
         							fflush(stdin);
         							update_statement(phead_dscb);
 									in_ten_chuyen_bay(phead_dscb);
@@ -708,6 +715,7 @@ void Chon_chucnang(){
 									}while(true);
 								}	
         						if (y==6){
+									if (thong_bao_DSCB_0(phead_dscb)) break;
         							fflush(stdin);
 									in_ten_chuyen_bay(phead_dscb);
 								
@@ -806,6 +814,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 8, s);
 								xoa_gt(1);
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								update_statement(phead_dscb);
 								in_ten_chuyen_bay(phead_dscb);
@@ -873,7 +882,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 8, s);
 								xoa_gt(1);
-
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								in_ten_chuyen_bay(phead_dscb);
 								do {
@@ -914,7 +923,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 8, s);
 								xoa_gt(1);
-
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								in_ten_chuyen_bay(phead_dscb);
 								do {
@@ -1064,7 +1073,9 @@ void Chon_chucnang(){
 							
         						if (y==3){
         							fflush(stdin);
+									if (thong_bao_DSCB_0(phead_dscb)) break;
 									in_ten_chuyen_bay(phead_dscb);
+									
         							do{
 										ve_hcnrong(42+tmpx,15,65,3); 
 										gotoxy(44 + tmpx,16);
@@ -1098,6 +1109,7 @@ void Chon_chucnang(){
         						if (y==6) in_DSCB_Day_place(phead_dscb);
         						if (y==10){
         					 		fflush(stdin);
+									if (thong_bao_DSCB_0(phead_dscb)) break;
 									in_ten_chuyen_bay(phead_dscb);
 									do{
 										ve_hcnrong(42+tmpx,15,65,3); 
@@ -1128,7 +1140,11 @@ void Chon_chucnang(){
 										}
 									}while(check==NULL);
 								}
-        						if (y==14) print_so_luot_thuc_hien(dsmb);
+								if (y == 14)
+								{
+									if (thong_bao_DSCB_0(phead_dscb)) break;
+									print_so_luot_thuc_hien(dsmb);
+								}
         						if (y==18) In_tatca_hk();
         						break;
 							}
@@ -1169,6 +1185,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 21, s);
 								xoa_gt(1);
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								update_statement(phead_dscb);
 								in_ten_chuyen_bay(phead_dscb);
@@ -1236,7 +1253,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 21, s);
 								xoa_gt(1);
-
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								in_ten_chuyen_bay(phead_dscb);
 								do {
@@ -1277,7 +1294,7 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 21, s);
 								xoa_gt(1);
-
+								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								in_ten_chuyen_bay(phead_dscb);
 								do {

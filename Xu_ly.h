@@ -51,6 +51,25 @@ NODE_hanhkhach search_hk(char temp_cmnd[], NODE_hanhkhach& root);
 
 //=============================================== HAM BO TRO ========================================================
 
+bool thong_bao_DSMB_0(ds_may_bay ds)
+{
+	if (ds.n == 0)
+	{
+		MessageBox(NULL, L"danh sach may bay trong!", L"THONG BAO", MB_ICONHAND | MB_OK);
+		while (kbhit()) getch();
+		return true;
+	}
+}
+
+bool thong_bao_DSCB_0(PTR_chuyenbay  dscb)
+{
+	if (dscb==NULL)
+	{
+		MessageBox(NULL, L"danh sach chuyen bay trong!", L"THONG BAO", MB_ICONHAND | MB_OK);
+		while (kbhit()) getch();
+		return true;
+	}
+}
 //Ham xoa thanh cong cu 
 void Xoa_chucnang(int x, int n, string s) {
 	gotoxy(x, 1);
@@ -344,6 +363,7 @@ void Nhan_chu(char t[], int x, int y, int dem, int& ktra) {
 					}
 					return;
 				}
+				
 			}
 			// cho phep nhap ki tu va so
 			if (ktra == 1) {
@@ -412,6 +432,8 @@ void Nhan_chu(char t[], int x, int y, int dem, int& ktra) {
 					}
 					return;
 				}
+				
+				
 			}
 			//cho phep nhap so
 			if (ktra == 3) {
@@ -432,7 +454,7 @@ void Nhan_chu(char t[], int x, int y, int dem, int& ktra) {
 					}
 				}
 				if (ch == 8) {
-					t[d - 1] = '\0';
+					if (d > 0) t[d - 1] = '\0';
 					if (x > tempx) {
 						d--;
 						x--;
@@ -446,6 +468,7 @@ void Nhan_chu(char t[], int x, int y, int dem, int& ktra) {
 					}
 					return;
 				}
+				
 			}
 		}
 	}
@@ -750,6 +773,12 @@ void Viet_hoa(char t[]) {
 	}
 }
 
+
+
+
+
+
+
 //=============================================== ND MAY BAY ========================================================
 
 int	vetify_may_bay(char temp_mamb[]) {//  số lượng chuyến bay của 1 số hiệu hiệu máy bay
@@ -823,6 +852,7 @@ int search_ma_may_bay(ds_may_bay& dsmb, int x, int y) {
 }
 void in_DS_MB(ds_may_bay ds)
 {
+	if (ds.n == 0) return;
 	int x = 4, y = 8, n = 16, j = 3, dem = 1, pageht = 0, page = 0, cd = 0;
 
     Ve_bang(x, y, n, 4, dem);
@@ -1358,6 +1388,7 @@ void in_DS_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 	Xoa_khunhap();
 }
 void in_ten_chuyen_bay(PTR_chuyenbay phead_dscb) {
+	if (phead_dscb == NULL) return;
 	sort_chuyen_bay_by_time(phead_dscb);
 	node_cb* ptr = new node_cb;
 	ptr = phead_dscb;
@@ -1520,17 +1551,7 @@ void add_new_ch_bay(PTR_chuyenbay& phead_dscb, ds_may_bay dsmb) {
 				return;
 			}
 		}
-		/*else if (dsmb.data[result]->active == 0) {
-			int temp = MessageBox(NULL, L"May bay khong con hoat dong nen khong the thuc hien chuyen bay moi\n Ban co muon nhap lai khong?", L"THONG BAO", MB_ICONWARNING | MB_OKCANCEL);
-			while (kbhit()) getch();
-			if (temp == IDCANCEL) {
-				ShowConsoleCursor(false);
-				Xoa_khunhap();
-				return;
-			}
-			else
-				result = -1;
-		}*/
+		
 	} while (result < 0);
 	Ve_khunhap_chbay(x, y);
 	gotoxy(x + 26, y + 5); cout << temp_ma_cb;
@@ -3177,6 +3198,7 @@ void print_so_luot_thuc_hien(ds_may_bay& dsmb)
 	}
 	page = dsmb.n / 15;
 	if ((dsmb.n - (page * 15)) > 0) page++;
+	if (page == 0) page = 1;
 	pageht = 1;
 	gotoxy(x + 35, y + 33); cout << pageht << "/" << page;
 	ShowConsoleCursor(false);

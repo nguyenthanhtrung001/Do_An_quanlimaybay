@@ -461,6 +461,8 @@
 #include "menu.h"
 int main() {
 	
+	
+	
 	Chon_chucnang();
 	deleteTree(root_hk);
 	delete_dsmb(dsmb);

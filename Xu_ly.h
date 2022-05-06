@@ -59,6 +59,7 @@ bool thong_bao_DSMB_0(ds_may_bay ds)
 		while (kbhit()) getch();
 		return true;
 	}
+	else return false;
 }
 
 bool thong_bao_DSCB_0(PTR_chuyenbay  dscb)
@@ -69,6 +70,7 @@ bool thong_bao_DSCB_0(PTR_chuyenbay  dscb)
 		while (kbhit()) getch();
 		return true;
 	}
+	return false;
 }
 
 bool thong_bao_DSHK_0(NODE_hanhkhach  hk)
@@ -79,6 +81,7 @@ bool thong_bao_DSHK_0(NODE_hanhkhach  hk)
 		while (kbhit()) getch();
 		return true;
 	}
+	return false;
 }
 
 //Ham xoa thanh cong cu 
@@ -1142,7 +1145,7 @@ void delete_may_bay(ds_may_bay& dsmb) {
 		Xoa_khunhap();
 		return;
 	}
-	int times = vetify_may_bay(dsmb.data[result]->so_hieu_may_bay);    // tra ve sl trang thia 1-2
+	int times = vetify_may_bay(dsmb.data[result]->so_hieu_may_bay);    // tra ve sl trang thai 1-2
 	if (times == 0) {
 
 		for (int i = result; i < dsmb.n - 1; i++) {
@@ -3228,6 +3231,7 @@ void in_DSCB_Day_place(PTR_chuyenbay& phead_dscb) {
 //In so lan thuc hien cua chuyen bay 
 void print_so_luot_thuc_hien(ds_may_bay& dsmb)
 {
+	if (thong_bao_DSMB_0(dsmb)) return;
 	for (int i = 0; i < dsmb.n; i++) {
 
 		int temp_index = i;

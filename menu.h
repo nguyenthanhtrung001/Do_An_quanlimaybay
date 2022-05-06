@@ -1146,7 +1146,7 @@ void Chon_chucnang(){
 								}
 								if (y == 14)
 								{
-									if (thong_bao_DSCB_0(phead_dscb)) break;
+									
 									print_so_luot_thuc_hien(dsmb);
 								}
 								if (y == 18)

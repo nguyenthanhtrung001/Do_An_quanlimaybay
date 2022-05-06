@@ -110,6 +110,27 @@ void Chuyenmau(int x, int y, int ma_BG, int ma_Kitu, string s) {
 	SetColor(0);
 	gotoxy(x, y);
 }
+
+void Chuyenmau_do( string s) {
+	
+	
+	SetBGColor(15);
+	SetColor(4);
+	cout << s;	
+	SetColor(1);
+	
+}
+void Chuyenmau_xanh(string s) {
+
+
+	SetBGColor(15);
+	SetColor(66);
+	cout << s;
+	SetColor(1);
+
+}
+
+
 void Ve_congcu(int x, string s) {
 	SetBGColor(1); SetColor(0);
 	gotoxy(x, 1);
@@ -1009,6 +1030,7 @@ void add_new_MB(ds_may_bay& dsmb) {
 
 }
 void edit_maybay(ds_may_bay& dsmb) {
+	if (thong_bao_DSMB_0(dsmb)) return;
 	in_DS_MB(dsmb);
 	int x = 42 + 30, y = 12, ktra;
 	ve_hcnrong(x, y, 64, 10);//vẽ hình chữ nhật rỗng vị trí x y chiều dài 64 chiều rộng 10
@@ -1092,6 +1114,7 @@ void edit_maybay(ds_may_bay& dsmb) {
 	}
 }
 void delete_may_bay(ds_may_bay& dsmb) {
+	if (thong_bao_DSMB_0(dsmb)) return;
 	in_DS_MB(dsmb);
 	int x = 42+30, y = 12;
 	ve_hcnrong(x, y, 64, 18);
@@ -1959,7 +1982,7 @@ void edit_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 				while (kbhit()) getch();
 			}
 			else if (check_12h_chuyen_bay_version_2(phead_dscb, edit_node, edit_node->data.so_hieu_may_bay, temp_depart) == false) {
-				MessageBox(NULL, L"Mot may bay khong the thuc hien 2 chuyen bay cach nhau duoi 2 gio!\nVui long nhap lai!", L"THONG BAO", MB_ICONWARNING | MB_OK);
+				MessageBox(NULL, L"Mot may bay khong the thuc hien 2 chuyen bay cach nhau duoi 12 gio!\nVui long nhap lai!", L"THONG BAO", MB_ICONWARNING | MB_OK);
 				while (kbhit()) getch();
 			}
 			else {
@@ -2826,9 +2849,24 @@ void remove_ve(ds_ve& danh_sach_ve) {
 	return;
 }
 // Ham gioi thieu chuc nang 
+
+void f1_f5(int x,int y)
+{
+	x = x + 5;
+	gotoxy(x-4, y);  cout << "CAC PHIM TRO NANG";
+	gotoxy(x, y+1); Chuyenmau_do( "F1: "); cout << "Lap Chuyen Bay Moi";
+	gotoxy(x, y+2); Chuyenmau_do("F2: "); cout << "Hieu Chinh Chuyen Bay ";
+	gotoxy(x, y+3); Chuyenmau_do("F3: ");  cout << "Dat ve";
+	gotoxy(x + 40, y+1); Chuyenmau_do("F4: ");  cout << "In DS Ve Trong";
+	gotoxy(x+40, y+2);  Chuyenmau_do("F5: ");  cout << "In DS Hanh Khach 1 Chuyen Bay";
+	
+
+
+}
+
 void ve_gioithieu(int n, int m)
 {
-	SetBGColor(15);
+	//SetColor(57);
 	SetColor(1);
 	int x = 6, y = 23;
 	gotoxy(x, y);
@@ -2841,7 +2879,10 @@ void ve_gioithieu(int n, int m)
 	while (j <= m - 2) {
 		cout << char(186);
 		for (int i = 1; i <= n - 2; i++) {
+			
 			cout << " ";
+			
+			
 		}
 		cout << char(186); gotoxy(x, ++y);
 		j++;
@@ -2853,10 +2894,14 @@ void ve_gioithieu(int n, int m)
 	cout << char(188);
 	gotoxy(68, 24); cout << "GIOI THIEU";
 	gotoxy(7, 25); cout << " Chuc nang: ";
-	gotoxy(7, 38); cout << "Huong dan:";
-	gotoxy(7, 39); cout << "          Nhan Phim Up/Down (len/xuong) de lua chon cac chuc nang khac";
-	gotoxy(7, 41); cout << "          Nhan Phim Left/Right (trai/phai) de lua chon cac thanh chuc nang khac";
+	
+	
+	
+	gotoxy(7, 38); cout << " Huong dan:";
+	gotoxy(7, 39); cout << "          Nhan Phim"; Chuyenmau_do(" Up / Down"); cout<< " (len / xuong) de lua chon cac chuc nang khac";
+	gotoxy(7, 41); cout << "          Nhan Phim"; Chuyenmau_do(" Left / Right");cout<< " (trai / phai) de lua chon cac thanh chuc nang khac";
 	gotoxy(10, 42); cout << "Esc : Thoat";
+	
 	//	gotoxy(50,42);cout<<"F2: Luu";
 	SetBGColor(15);
 	SetColor(0);
@@ -2879,53 +2924,60 @@ void gioi_thieu(int i) {
 	xoa_gt(0);
 	SetColor(1);
 	if (i == 1) {
-		gotoxy(7, 26); cout << "           Them mot may bay vao danh sach may bay ";
-		gotoxy(7, 27); cout << "(bao gom cac thong tin nhu: so hieu may bay, loai may bay , so cho) ";
-		gotoxy(7, 28); cout << "*Luu y : -So hieu may bay khong duoc trung voi cac so hieu may bay trong danh sach may bay";
-		gotoxy(7, 30); cout << " Danh sach may bay hien co : [" << dsmb.n << "]";
+		gotoxy(7, 26);  Chuyenmau_do("           THEM MAY BAY MOI ");
+		gotoxy(7, 27); cout << "    (bao gom cac thong tin nhu: so hieu may bay, loai may bay , so cho) ";
+		gotoxy(7, 28); Chuyenmau_do(" *Luu y :"); cout << (" - So Hieu May Bay la"); Chuyenmau_do(" DUY NHAT"); cout<< " (khong trung)";
+		gotoxy(7, 30); cout << " Danh sach may bay hien co : "; Chuyenmau_do("["); cout << dsmb.n; Chuyenmau_do("]");
+		f1_f5(7, 33);
 	}
 	if (i == 2) {
-		gotoxy(7, 26); cout << "            Xoa mot may bay khoi danh sach may bay ";
-		gotoxy(7, 27); cout << " (ban can so hieu may bay hien dang co trong danh sach may bay de xoa) ";
-		gotoxy(7, 28); cout << " *Luu y: -Neu nhap so hieu may bay khong co trong danh sach thi se khong thuc hien duoc lenh";
-		gotoxy(7, 30); cout << " Danh sach may bay hien co : [" << dsmb.n << "]";
+		gotoxy(7, 26); Chuyenmau_do("            XOA MAY BAY  ");
+		gotoxy(7, 27); cout << "     (ban can so hieu may bay hien dang co trong danh sach may bay de xoa) ";
+		gotoxy(7, 28); Chuyenmau_do(" *Luu y :"); cout << "  - Xoa duoc khi MB "; Chuyenmau_do("chua lap chuyen bay"); cout << " hoac chuyen bay o trang thai"; Chuyenmau_do("\"HUY\"");cout<<" hoac "; Chuyenmau_do("\"HOAN TAT\"");
+		gotoxy(7, 30); cout << " Danh sach may bay hien co : "; Chuyenmau_do("["); cout << dsmb.n; Chuyenmau_do("]");
+		f1_f5(7, 33);
 	}
 	if (i == 3) {
-		gotoxy(7, 26); cout << "            Hieu chinh mot may bay trong danh sach may bay ";
-		gotoxy(7, 27); cout << " (ban can so hieu may bay hien dang co trong danh sach may bay de hieu chinh) ";
-		gotoxy(7, 28); cout << " *Luu y: -Neu nhap so hieu may bay khong co trong danh sach thi se khong thuc hien duoc lenh";
-		gotoxy(7, 29); cout << "        -Ban chi thay doi duoc loai may bay va so cho cua may bay";
-		gotoxy(7, 30); cout << " Danh sach may bay hien co : [" << dsmb.n << "]";
+		gotoxy(7, 26); Chuyenmau_do("            HIEU CHINH MAY BAY ");
+		gotoxy(7, 27); cout << "     (ban can so hieu may bay hien dang co trong danh sach may bay de hieu chinh) ";
+		gotoxy(7, 28); Chuyenmau_do(" *Luu y :"); cout << "  -Neu MB chua Lap Chuyen Bay (Thay doi duoc "; Chuyenmau_do("\"Loai MB\""); cout << " va"; Chuyenmau_do(" \"So Cho\""); cout << ")";
+		gotoxy(7, 29); cout << "        -Neu MB da Lap Chuyen Bay (Thay doi duoc"; Chuyenmau_do("  \"So Cho\""); cout << "theo chieu tang"; Chuyenmau_do(" (>= So Cho ban dau)"); cout << ")";
+		gotoxy(7, 30); cout << " Danh sach may bay hien co : "; Chuyenmau_do("["); cout << dsmb.n; Chuyenmau_do("]");
+		f1_f5(7, 33);
 	}
 	if (i == 4) {
-		gotoxy(7, 26); cout << "           Them mot chuyen bay vao danh sach chuyen bay ";
-		gotoxy(7, 27); cout << "(bao gom cac thong tin nhu: Ma chuyen bay, so hieu may bay,  Ngay gio khoi hanh, san bay den , *trang thai) ";
-		gotoxy(7, 28); cout << "*trang thai bao gom : 0: huy chuyen, 1: con ve, 2: het ve, 3: hoan tat ";
-		gotoxy(7, 30); cout << "*Luu y : -Chi them chuyen bay khi danh sach may bay co it nhat 1 may bay";
-		gotoxy(7, 31); cout << "        -Ma chuyen bay khong duoc trung voi cac ma chuyen bay trong danh sach chuyen bay";
-		gotoxy(7, 32); cout << "        -So hieu may bay cua chuyen bay phai ton tai trong danh sach may bay";
+		gotoxy(7, 26); Chuyenmau_do("           LAP CHUYEN BAY MOI ");
+		gotoxy(7, 27); cout << "     (bao gom cac thong tin nhu: Ma chuyen bay, so hieu may bay,  Ngay gio khoi hanh, san bay den , *trang thai) ";
+		gotoxy(7, 28); cout << " *trang thai bao gom : 0: huy chuyen, 1: con ve, 2: het ve, 3: hoan tat ";
+		gotoxy(7, 30); Chuyenmau_do(" *Luu y :");  cout << (" - Ma May Bay la"); Chuyenmau_do(" DUY NHAT"); cout << " (khong trung)";
+		gotoxy(7, 31);  cout << "        - Neu chuyen bay moi duoc lap tu 1 may bay thi"; Chuyenmau_do(" cac Chuyen Bay cach nhau >= 12h");
+		
+		f1_f5(7, 33);
 	}
 	if (i == 41) {
-		gotoxy(7, 26); cout << "           In Danh sach cac chuyen bay co trong du lieu chuyen bay ";
-		gotoxy(7, 27); cout << "(bao gom cac thong tin nhu: Ma chuyen bay, so hieu may bay,  Ngay gio khoi hanh, san bay den , *trang thai) ";
-		gotoxy(7, 28); cout << "*trang thai bao gom : 0: huy chuyen, 1: con ve, 2: het ve, 3: hoan tat ";
-		gotoxy(7, 30); cout << "*Luu y :";
+		gotoxy(7, 26); Chuyenmau_do("           IN DANH SACH CAC CHUYEN BAY ");
+		gotoxy(7, 27); cout << "     (bao gom cac thong tin nhu: Ma chuyen bay, so hieu may bay,  Ngay gio khoi hanh, san bay den , *trang thai) ";
+		gotoxy(7, 28); cout << " *trang thai bao gom : 0: huy chuyen, 1: con ve, 2: het ve, 3: hoan tat ";
+		gotoxy(7, 30); Chuyenmau_do(" *Luu y :"); 
+		f1_f5(7, 33);
 		
 	}
 	if (i == 5) {
-		gotoxy(7, 26); cout << "            Hieu ching ngay gio mot chuyen bay trong danh sach chuyen bay ";
-		gotoxy(7, 27); cout << " (ban can ma chuyen bay va so hieu may bay hien dang co trong danh sach may ba de hieu chinh) ";
-		gotoxy(7, 29); cout << " *Luu y: -Neu nhap ma chuyen bay khong co trong danh sach thi se khong thuc hien duoc lenh";
+		gotoxy(7, 26); Chuyenmau_do("            HIEU CHINH NGAY GIO MOT CHUYEN BAY ");
+		gotoxy(7, 27); cout << "     (ban can ma chuyen bay va so hieu may bay hien dang co trong danh sach may ba de hieu chinh) ";
+		gotoxy(7, 29); Chuyenmau_do(" *Luu y :"); cout << "  - Chi hieu chinh duoc khi chuyen bay o trang thai "; Chuyenmau_do(" \"(1) con ve\" "); cout << "hoac"; Chuyenmau_do(" \"(2) het ve\"");
+		f1_f5(7, 33);
 	}
 	if (i == 6) {
-		gotoxy(7, 26); cout << "            Huy mot chuyen bay ";
-		gotoxy(7, 27); cout << " (ban can ma chuyen bay hien dang co trong danh sach chuyen bay de huy) ";
-		gotoxy(7, 29); cout << " *Luu y: -Neu nhap ma chuyen bay khong co trong danh sach thi se khong thuc hien duoc lenh";
+		gotoxy(7, 26); Chuyenmau_do("            HUY CHUYEN BAY ");
+		gotoxy(7, 27); cout << "     (ban can ma chuyen bay hien dang co trong danh sach chuyen bay de huy) ";
+		gotoxy(7, 29); Chuyenmau_do(" *Luu y :"); cout << "  - Huy khi MAY BAY o trang thai"; Chuyenmau_do(" \"(1) con ve\" "); cout << "hoac"; Chuyenmau_do(" \"(2) het ve\"");
+		f1_f5(7, 33);
 	}
 	if (i == 7) {
-		gotoxy(7, 26); cout << "             Cho phep dat ve tren 1 chuyen bay";
-		gotoxy(7, 27); cout << "			  (Ban can co so cmnd de dang ky)";
-		gotoxy(7, 29); cout << "*Luu y: -Tren 1 chuyen bay, moi hanh khach chi duoc mua 1 ve.";
+		gotoxy(7, 26); Chuyenmau_do("             DAT VE TREN 1 CHUYEN BAY");
+		gotoxy(7, 27); cout << "		(Ban can co so cmnd de dang ky)";
+		gotoxy(7, 29); Chuyenmau_do(" *Luu y :"); cout << "  - Tren 1 chuyen bay,"; Chuyenmau_do(" moi hanh khach chi duoc mua 1 ve.");
 		int y = 26;
 		gotoxy(96, y); cout << "        Mo phong so do cho ngoi";
 		gotoxy(96, y + 1); cout << " -----------------------------------";
@@ -2939,36 +2991,44 @@ void gioi_thieu(int i) {
 		gotoxy(96, y + 9); cout << char(176) << "                 .                 " << char(176);
 		gotoxy(96, y + 10); cout << char(186) << " |281||282||283|...|288||289||290| " << char(186);
 		gotoxy(96, y + 11); cout << char(176) << " |291||292||293|...|298||299||300| " << char(176);
+		f1_f5(7, 33);
 	}
+	
 	if (i == 8) {
-		gotoxy(7, 26); cout << "             Cho phep huy ve da dat cua hanh khach";
-		gotoxy(7, 27); cout << "			  (Ban can co so cmnd de huy ve)";
-		gotoxy(7, 29); cout << "*Luu y:";
+		gotoxy(7, 26); Chuyenmau_do("             HUY VE DA DAT");
+		gotoxy(7, 27); cout << "       (Ban can co so cmnd de huy ve)";
+		gotoxy(7, 29); Chuyenmau_do(" *Luu y :"); 
+		f1_f5(7, 33);
 	}
 	if (i == 9) {
-		gotoxy(7, 26); cout << "             In danh sach cac hanh khach thuoc 1 chuyen bay dua vao ma chuyen bay";
-		gotoxy(7, 27); cout << "(Bao gom cac thong tin nhu: STT, So ve, So cmnd, Ho ten, Phai)";
-		gotoxy(7, 29); cout << "*Luu y:";
+		gotoxy(7, 26); Chuyenmau_do("             IN DANH SACH HANH KHACH THUOC 1 CHUYEN BAY");
+		gotoxy(7, 27); cout << " (Bao gom cac thong tin nhu: STT, So ve, So cmnd, Ho ten, Phai)";
+		gotoxy(7, 29); Chuyenmau_do(" *Luu y :");
+		f1_f5(7, 33);
 	}
 	if (i == 91) {
-		gotoxy(7, 26); cout << "             In du lieu tat ca hanh khach ";
-		gotoxy(7, 27); cout << "(Bao gom cac thong tin nhu: So cmnd, Ho ten, Phai)";
-		gotoxy(7, 29); cout << "*Luu y:";
+		gotoxy(7, 26); Chuyenmau_do("             IN DU LIEU TAT CA HANH KHACH ");
+		gotoxy(7, 27); cout << "     (Bao gom cac thong tin nhu: So cmnd, Ho ten, Phai)";
+		gotoxy(7, 29); Chuyenmau_do(" *Luu y :"); 
+		f1_f5(7, 33);
 	}
 	if (i == 10) {
-		gotoxy(7, 26); cout << "             In danh sach cac chuyen bay khoi hanh trong ngay dd/mm/yyyy den noi XXXX   ";
-		gotoxy(7, 27); cout << "(Danh sach cho biet cu the so luong cac ve con trong va gio khoi hanh)";
-		gotoxy(7, 29); cout << "*Luu y:";
+		gotoxy(7, 26); Chuyenmau_do("            IN DANH SACH CAC CHUYEN BAY KHOI HANH TRONG NGAY dd/mm/yyyy DEN NOI XXXX   ");
+		gotoxy(7, 27); cout << " (Danh sach cho biet cu the so luong cac ve con trong va gio khoi hanh)";
+		gotoxy(7, 29); Chuyenmau_do(" *Luu y :"); 
+		f1_f5(7, 33);
 	}
 	if (i == 11) {
-		gotoxy(7, 26); cout << "             In danh sach cac ve con trong cua 1 chuyen bay co ma chuyen bay la X";
-		gotoxy(7, 27); cout << "(Danh sach cho biet cu the so luong cac ve con trong cua chuyen bay X)";
-		gotoxy(7, 29); cout << "*Luu y:";
+		gotoxy(7, 26); Chuyenmau_do("            IN DANH SACH CAC VE CON TRONG CUA MOT CHUYEN BAY");
+		gotoxy(7, 27); cout << " (Danh sach cho biet cu the so luong cac ve con trong cua chuyen bay X)";
+		gotoxy(7, 29); Chuyenmau_do(" *Luu y :"); 
+		f1_f5(7, 33);
 	}
 	if (i == 12) {
-		gotoxy(7, 26); cout << "             Thong ke so luot thuc hien chuyen bay cua tung may bay theo thu tu so luot thuc hien giam dan";
-		gotoxy(7, 27); cout << "(Danh sach cho biet cu the so luot thuc hien cua cac chuyen bay)";
-		gotoxy(7, 29); cout << "*Luu y:";
+		gotoxy(7, 26); Chuyenmau_do("             THONG KE SO LUOT THUC HIEN CHUYEN BAY CUA CAC MAY BAY");
+		gotoxy(7, 27); cout << " (Danh sach cho biet cu the so luot thuc hien cua cac chuyen bay)";
+		gotoxy(7, 29); Chuyenmau_do(" *Luu y :"); 
+		f1_f5(7, 33);
 	}
 	SetColor(0);
 	ShowConsoleCursor(false);

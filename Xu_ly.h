@@ -55,7 +55,7 @@ bool thong_bao_DSMB_0(ds_may_bay ds)
 {
 	if (ds.n == 0)
 	{
-		MessageBox(NULL, L"danh sach may bay trong!", L"THONG BAO", MB_ICONHAND | MB_OK);
+		MessageBox(NULL, L"Danh sach may bay trong!", L"THONG BAO", MB_ICONHAND | MB_OK);
 		while (kbhit()) getch();
 		return true;
 	}
@@ -65,11 +65,22 @@ bool thong_bao_DSCB_0(PTR_chuyenbay  dscb)
 {
 	if (dscb==NULL)
 	{
-		MessageBox(NULL, L"danh sach chuyen bay trong!", L"THONG BAO", MB_ICONHAND | MB_OK);
+		MessageBox(NULL, L"Danh sach chuyen bay trong!", L"THONG BAO", MB_ICONHAND | MB_OK);
 		while (kbhit()) getch();
 		return true;
 	}
 }
+
+bool thong_bao_DSHK_0(NODE_hanhkhach  hk)
+{
+	if (hk == NULL)
+	{
+		MessageBox(NULL, L"Chua co hanh khach nao!", L"THONG BAO", MB_ICONHAND | MB_OK);
+		while (kbhit()) getch();
+		return true;
+	}
+}
+
 //Ham xoa thanh cong cu 
 void Xoa_chucnang(int x, int n, string s) {
 	gotoxy(x, 1);

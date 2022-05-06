@@ -426,7 +426,11 @@ void Chon_chucnang(){
 								}
         						if (y==6) edit_chuyen_bay(phead_dscb);
         						if (y==10) del_chuyen_bay(phead_dscb,dsmb);
-        						if (y==13) in_DS_chuyen_bay(phead_dscb);
+								if (y == 13)
+								{
+									if (thong_bao_DSCB_0(phead_dscb)) break;
+									in_DS_chuyen_bay(phead_dscb);
+								}
         						break;
 							}
 							if (j==27) {
@@ -1145,7 +1149,11 @@ void Chon_chucnang(){
 									if (thong_bao_DSCB_0(phead_dscb)) break;
 									print_so_luot_thuc_hien(dsmb);
 								}
-        						if (y==18) In_tatca_hk();
+								if (y == 18)
+								{
+									if (thong_bao_DSHK_0(root_hk)) break;
+									In_tatca_hk();
+								}
         						break;
 							}
 							if (j==27) {

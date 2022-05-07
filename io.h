@@ -46,6 +46,7 @@ void Open_file_may_bay(ds_may_bay &dsmb, char *filename) {
 
 
 
+
 void Save_file_chuyen_bay(PTR_chuyenbay &phead_cb,char *filename1, char *filename2){
 
  FILE * f1;
@@ -60,11 +61,13 @@ void Save_file_chuyen_bay(PTR_chuyenbay &phead_cb,char *filename1, char *filenam
  }
  
  PTR_chuyenbay ptr=phead_cb;
+ 
  while(ptr!=NULL){
  	fwrite(&(ptr->data), sizeof(chuyen_bay), 1, f1);
 	
 	
 		for(int i=0;i<ptr->data.danh_sach_ve.n;i++){
+           
  		fwrite(ptr->data.danh_sach_ve.so_ghe[i],sizeof(ve),1,f2);
 	}
  	ptr=ptr->pnext;

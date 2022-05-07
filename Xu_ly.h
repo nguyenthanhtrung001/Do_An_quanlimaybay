@@ -1275,7 +1275,7 @@ void Ve_khunhap_chbay(int x, int y) {
 	gotoxy(x + 31, y + 22); cout << "Ngay\\thang\\nam"; gotoxy(x + 47, y + 22); cout << "    "; gotoxy(x + 54, y + 22); cout << "    "; gotoxy(x + 61, y + 22); cout << "      ";
 }
 void free_memory(ds_ve& danh_sach_ve) {
-	for (int i = 0; i < danh_sach_ve.limit; i++) {
+	for (int i = danh_sach_ve.n; i < danh_sach_ve.limit; i++) {
 		delete danh_sach_ve.so_ghe[i];
 		danh_sach_ve.so_ghe[i] = NULL;
 	}
@@ -2207,6 +2207,7 @@ void LNR(NODE_hanhkhach& root, int& cd) {
 }
 NODE_hanhkhach search_hk(char temp_cmnd[], NODE_hanhkhach& root) {
 
+	
 	if (root == NULL) {
 		return root; //phan biet ro rang!
 	}
@@ -2297,6 +2298,7 @@ void in_HK_thuoc_chuyen_bay(chuyen_bay cb) {
 		cd++;// dem co bao nhieu hanh khach
 
 		//tim du lieu trong cay nhi phan
+		 
 		result = search_hk(cb.danh_sach_ve.so_ghe[i]->cmnd, root_hk);
 
 		if (cd <= 15) {

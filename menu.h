@@ -308,6 +308,7 @@ void Chon_chucnang(){
 									SetBGColor(15);
 									ShowConsoleCursor(false);
 									check = search_node(phead_dscb, temp_macb);
+									
 									if (check != NULL) {
 										Xoa_khunhap();
 										in_HK_thuoc_chuyen_bay(check->data);

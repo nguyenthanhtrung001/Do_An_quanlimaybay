@@ -26,7 +26,7 @@ void Chon_chucnang(){
 		 ve_thanhcongcu();
 		
 		int i =0;int x=4,ktra;
-		int tmpx = 25;
+		int tmpx = 33;
 		while(!kbhit()){
 			//Logo(7,10);
 			Sleep(200);
@@ -181,6 +181,13 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 11, s);
 								xoa_gt(1);
+								if (so_luong_tt_1_2(phead_dscb) == 0)
+								{
+									MessageBox(NULL, L"Khong the DAT VE\nVi danh sach chi con cac chuyen bay da bi HUY hoac DANG BAY !", L"THONG BAO", MB_ICONHAND | MB_OK);
+									while (kbhit()) getch();
+									break;
+
+								}
 								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								update_statement(phead_dscb);
@@ -292,7 +299,7 @@ void Chon_chucnang(){
 								xoa_gt(1);
 								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
-								in_ten_chuyen_bay(phead_dscb);
+								in_ten_chuyen_bay_all(phead_dscb);
 								do {
 									ve_hcnrong(42 + tmpx, 15, 65, 3);
 									gotoxy(44 + tmpx, 16);
@@ -472,6 +479,14 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 17, s);
 								xoa_gt(1);
+								if (so_luong_tt_1_2(phead_dscb) == 0)
+								{
+									MessageBox(NULL, L"Khong the DAT VE\nVi danh sach chi con cac chuyen bay da bi HUY hoac DANG BAY !", L"THONG BAO", MB_ICONHAND | MB_OK);
+									while (kbhit()) getch();
+									break;
+
+								}
+
 								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								update_statement(phead_dscb);
@@ -583,7 +598,7 @@ void Chon_chucnang(){
 								xoa_gt(1);
 								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
-								in_ten_chuyen_bay(phead_dscb);
+								in_ten_chuyen_bay_all(phead_dscb);
 								do {
 									ve_hcnrong(42 + tmpx, 15, 65, 3);
 									gotoxy(44 + tmpx, 16);
@@ -658,6 +673,13 @@ void Chon_chucnang(){
         						SetBGColor(15);
         						SetColor(0);
         						if (y==3) {
+									if (so_luong_tt_1_2(phead_dscb) == 0)
+									{
+										MessageBox(NULL, L"Khong the DAT VE\nVi danh sach chi con cac chuyen bay da bi HUY hoac DANG BAY !", L"THONG BAO", MB_ICONHAND | MB_OK);
+										while (kbhit()) getch();
+										break;
+
+									}
 									if(thong_bao_DSCB_0(phead_dscb)) break;
         							fflush(stdin);
         							update_statement(phead_dscb);
@@ -720,6 +742,13 @@ void Chon_chucnang(){
 									}while(true);
 								}	
         						if (y==6){
+									if (so_luong_tt_1_2(phead_dscb) == 0)
+									{
+										MessageBox(NULL, L"Khong the HUY VE\nVi danh sach chi con cac chuyen bay da bi HUY hoac DANG BAY !", L"THONG BAO", MB_ICONHAND | MB_OK);
+										while (kbhit()) getch();
+										break;
+
+									}
 									if (thong_bao_DSCB_0(phead_dscb)) break;
         							fflush(stdin);
 									in_ten_chuyen_bay(phead_dscb);
@@ -819,6 +848,13 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 8, s);
 								xoa_gt(1);
+								if (so_luong_tt_1_2(phead_dscb) == 0)
+								{
+									MessageBox(NULL, L"Khong the DAT VE\nVi danh sach chi con cac chuyen bay da bi HUY hoac DANG BAY !", L"THONG BAO", MB_ICONHAND | MB_OK);
+									while (kbhit()) getch();
+									break;
+
+								}
 								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								update_statement(phead_dscb);
@@ -930,7 +966,7 @@ void Chon_chucnang(){
 								xoa_gt(1);
 								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
-								in_ten_chuyen_bay(phead_dscb);
+								in_ten_chuyen_bay_all(phead_dscb);
 								do {
 									ve_hcnrong(42 + tmpx, 15, 65, 3);
 									gotoxy(44 + tmpx, 16);
@@ -1079,7 +1115,7 @@ void Chon_chucnang(){
         						if (y==3){
         							fflush(stdin);
 									if (thong_bao_DSCB_0(phead_dscb)) break;
-									in_ten_chuyen_bay(phead_dscb);
+									in_ten_chuyen_bay_all(phead_dscb);
 									
         							do{
 										ve_hcnrong(42+tmpx,15,65,3); 
@@ -1194,6 +1230,13 @@ void Chon_chucnang(){
 							{
 								Xoa_chucnang(x, 21, s);
 								xoa_gt(1);
+								if (so_luong_tt_1_2(phead_dscb) == 0)
+								{
+									MessageBox(NULL, L"Khong the DAT VE\nVi danh sach chi con cac chuyen bay da bi HUY hoac DANG BAY !", L"THONG BAO", MB_ICONHAND | MB_OK);
+									while (kbhit()) getch();
+									break;
+
+								}
 								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
 								update_statement(phead_dscb);
@@ -1305,7 +1348,7 @@ void Chon_chucnang(){
 								xoa_gt(1);
 								if (thong_bao_DSCB_0(phead_dscb)) break;
 								fflush(stdin);
-								in_ten_chuyen_bay(phead_dscb);
+								in_ten_chuyen_bay_all(phead_dscb);
 								do {
 									ve_hcnrong(42 + tmpx, 15, 65, 3);
 									gotoxy(44 + tmpx, 16);

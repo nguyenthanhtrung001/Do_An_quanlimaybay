@@ -808,6 +808,23 @@ void Viet_hoa(char t[]) {
 	}
 }
 
+int so_luong_tt_1_2(PTR_chuyenbay  dscb)
+{
+	if (dscb == NULL) return 0;
+	int cnt = 0;
+	PTR_chuyenbay p = dscb;
+	while (p != NULL)
+	{
+		if (p->data.trang_thai != 0 && p->data.trang_thai != 3)
+		{
+			cnt++;
+		}
+		p = p->pnext;
+	}
+	return cnt;
+	
+}
+
 
 
 
@@ -816,7 +833,7 @@ void Viet_hoa(char t[]) {
 
 //=============================================== ND MAY BAY ========================================================
 
-int	vetify_may_bay(char temp_mamb[]) {//  số lượng chuyến bay của 1 số hiệu hiệu máy bay
+int	vetify_may_bay(char temp_mamb[]) {//  số lượng chuyến bay 1-2 của 1 số hiệu hiệu máy bay
 	node_cb* ptr = new node_cb;
 	ptr = phead_dscb;
 	int count = 0;
@@ -1510,6 +1527,94 @@ void in_ten_chuyen_bay(PTR_chuyenbay phead_dscb) {
 	ShowConsoleCursor(false);
 	
 }
+void in_ten_chuyen_bay_all(PTR_chuyenbay phead_dscb) {
+	if (phead_dscb == NULL) return;
+	sort_chuyen_bay_by_time(phead_dscb);
+	node_cb* ptr = new node_cb;
+	ptr = phead_dscb;
+	int x = 4, y = 8, n = 16, j = 3, dem = 1, pageht = 0, page = 0, cd = 0;
+
+	Ve_bang(x, y, n, 4, dem);
+	SetBGColor(1);
+	SetColor(15);
+
+	gotoxy(x + 1, y + 1); cout << "STT";
+	gotoxy(x + 12, y + 1); cout << "Ma CB";
+	gotoxy(x + 29, y + 1); cout << "  Thoi gian ";
+	gotoxy(x + 48, y + 1); cout << "Trang thai";
+
+
+
+	SetBGColor(15);
+	SetColor(0);
+
+	while (ptr != NULL) {
+		cd++;
+		if (cd <= 15 ) {
+
+
+			gotoxy(x + 6, y + j); cout << ptr->data.macb;
+			gotoxy(x + 26, y + j);  cout << ptr->data.depart_time.hour << ":" << ptr->data.depart_time.min << "  " << ptr->data.depart_time.day << "/"
+				<< ptr->data.depart_time.mon << "/" << ptr->data.depart_time.year;
+
+            gotoxy(x + 46+7, y + j); cout << ptr->data.trang_thai;
+
+			j += 2;
+		}
+		ptr = ptr->pnext;
+	}
+	page = cd / 15;
+	if (page == 0) page = 1;
+	if ((cd - (page * 15)) > 0) page++;
+	pageht = 1;
+	gotoxy(x + 33, y + 33); cout << pageht << "/" << page; ShowConsoleCursor(false);
+	int np = 0;
+	while (1) {
+		np = Nhanphim(); int k = 0;
+		if (np == 27 || np == 13) break;
+		if (np == 77 && pageht < page) {
+			pageht++;
+			k = 1;
+		}
+		if (np == 75 && pageht > 1) {
+			pageht--;
+			k = 1;
+		}
+		if (k == 1) {
+			cd = 0;
+			dem = pageht * 15 - 14;
+			Ve_bang(x, y, n, 6, dem);
+			SetBGColor(1);
+			SetColor(15);
+			gotoxy(x + 1, y + 1); cout << "STT";
+			gotoxy(x + 12, y + 1); cout << "Ma CB";
+			gotoxy(x + 29, y + 1); cout << "  Thoi gian ";
+			gotoxy(x + 48, y + 1); cout << "Trang thai";
+
+
+			SetBGColor(15);
+			SetColor(0);
+			j = 3;
+			ptr = phead_dscb;
+			while (ptr != NULL) {
+				cd++;
+				if (cd <= pageht * 15 && cd >= dem && ptr->data.trang_thai != 0) {
+
+					gotoxy(x + 6, y + j); cout << ptr->data.macb;
+					gotoxy(x + 26, y + j);  cout << ptr->data.depart_time.hour << ":" << ptr->data.depart_time.min << "  " << ptr->data.depart_time.day << "/"
+						<< ptr->data.depart_time.mon << "/" << ptr->data.depart_time.year;
+					gotoxy(x + 46+7, y + j); cout << ptr->data.trang_thai;
+
+					j += 2;
+				}
+				ptr = ptr->pnext;
+			}
+			gotoxy(x + 33, y + 33); cout << pageht << "/" << page;
+		}
+	}
+	ShowConsoleCursor(false);
+
+}
 
 void insert_node_cb(PTR_chuyenbay& phead_cb, node_cb* p) {
 	if (phead_cb == NULL) {
@@ -1717,8 +1822,15 @@ void add_new_ch_bay(PTR_chuyenbay& phead_dscb, ds_may_bay dsmb) {
 	Xoa_khunhap();
 
 }
-//ham xoa may bay
+//ham xoa chuyen bay
 void del_chuyen_bay(PTR_chuyenbay& phead_dscb, ds_may_bay& dsmb) {
+	if (so_luong_tt_1_2(phead_dscb) == 0)
+	{
+		MessageBox(NULL, L"Khong the HUY\nVi danh sach chi con cac chuyen bay da bi HUY hoac DANG BAY !", L"THONG BAO", MB_ICONHAND | MB_OK);
+		while (kbhit()) getch();
+		return;
+
+	}
 	in_ten_chuyen_bay(phead_dscb);
 	int x = 42+15, y = 12, ktra;
 	if (phead_dscb == NULL) {
@@ -1859,10 +1971,17 @@ bool check_12h_chuyen_bay_version_2(PTR_chuyenbay& phead_dscb, PTR_chuyenbay& ed
 }
 //ham hieu chinh ngay gio cua chuyen bay
 void edit_chuyen_bay(PTR_chuyenbay& phead_dscb) {
+	if (so_luong_tt_1_2(phead_dscb) == 0)
+	{
+		MessageBox(NULL, L"Khong the hieu chinh\nVi danh sach chi con cac chuyen bay da bi HUY hoac DANG BAY !", L"THONG BAO", MB_ICONHAND | MB_OK);
+		while (kbhit()) getch();
+		return;
+
+	}
 	in_ten_chuyen_bay(phead_dscb);
 	int x = 42+30, y = 12, ktra;
 	if (phead_dscb == NULL) {
-		MessageBox(NULL, L"danh sach chuyen bay trong!", L"THONG BAO", MB_ICONHAND | MB_OK);
+		MessageBox(NULL, L"Danh sach chuyen bay trong!", L"THONG BAO", MB_ICONHAND | MB_OK);
 		while (kbhit()) getch();
 		return;
 	}
@@ -2957,7 +3076,7 @@ void gioi_thieu(int i) {
 		gotoxy(7, 26); Chuyenmau_do("            HIEU CHINH MAY BAY ");
 		gotoxy(7, 27); cout << "     (ban can so hieu may bay hien dang co trong danh sach may bay de hieu chinh) ";
 		gotoxy(7, 28); Chuyenmau_do(" *Luu y :"); cout << "  -Neu MB chua Lap Chuyen Bay (Thay doi duoc "; Chuyenmau_do("\"Loai MB\""); cout << " va"; Chuyenmau_do(" \"So Cho\""); cout << ")";
-		gotoxy(7, 29); cout << "        -Neu MB da Lap Chuyen Bay (Thay doi duoc"; Chuyenmau_do("  \"So Cho\""); cout << "theo chieu tang"; Chuyenmau_do(" (>= So Cho ban dau)"); cout << ")";
+		gotoxy(7, 29); cout << "        -Neu MB da Lap Chuyen Bay (Thay doi duoc"; Chuyenmau_do("  \"So Cho\""); cout << " theo chieu tang"; Chuyenmau_do(" (>= So Cho ban dau)"); cout << ")";
 		gotoxy(7, 30); cout << " Danh sach may bay hien co : "; Chuyenmau_do("["); cout << dsmb.n; Chuyenmau_do("]");
 		f1_f5(7, 33);
 	}

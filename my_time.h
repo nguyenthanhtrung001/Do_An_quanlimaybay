@@ -64,7 +64,6 @@ bool check_depart_time(date_time dt){ // kiem tra thoi gian khoi hanh
 	return true;
 }
 
-
 // thoi gian tuong lai
 bool is_nearer(date_time time1,date_time time2){
 	if(time1.year<time2.year) return true;

@@ -1192,6 +1192,7 @@ void delete_may_bay(ds_may_bay& dsmb) {
 
 //=============================================== ND CHUYEN BAY ========================================================
 
+
 bool check_12h_chuyen_bay(PTR_chuyenbay& phead_dscb, char temp_so_hieu[], date_time dt) {
 
 
@@ -1971,6 +1972,8 @@ bool check_12h_chuyen_bay_version_2(PTR_chuyenbay& phead_dscb, PTR_chuyenbay& ed
 }
 //ham hieu chinh ngay gio cua chuyen bay
 void edit_chuyen_bay(PTR_chuyenbay& phead_dscb) {
+
+	
 	if (so_luong_tt_1_2(phead_dscb) == 0)
 	{
 		MessageBox(NULL, L"Khong the hieu chinh\nVi danh sach chi con cac chuyen bay da bi HUY hoac DANG BAY !", L"THONG BAO", MB_ICONHAND | MB_OK);
@@ -1978,6 +1981,7 @@ void edit_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 		return;
 
 	}
+nhap_lai:
 	in_ten_chuyen_bay(phead_dscb);
 	int x = 42+30, y = 12, ktra;
 	if (phead_dscb == NULL) {
@@ -1985,6 +1989,7 @@ void edit_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 		while (kbhit()) getch();
 		return;
 	}
+	
 	ve_hcnrong(x, y, 66, 18);
 	ve_hcnrong(x + 5, y + 4, 54, 3);
 	SetBGColor(14);
@@ -1998,8 +2003,8 @@ void edit_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 		Nhan_chu2(temp_ma, x + 22, y + 5, 15, dsmb, ktra);
 	} while (strlen(temp_ma) == 0);
 	strupr(temp_ma);
-
 	node_cb* edit_node = phead_dscb;
+
 	SetBGColor(15);
 	while (edit_node != NULL) {
 		if (strcmp(edit_node->data.macb, temp_ma) == 0) {
@@ -2007,6 +2012,7 @@ void edit_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 		}
 		else edit_node = edit_node->pnext;
 	}
+
 	if (edit_node == NULL) {
 		MessageBox(NULL, L"Ma chuyen bay khong ton tai!", L"THONG BAO", MB_ICONHAND | MB_OK);
 		while (kbhit()) getch();
@@ -2028,7 +2034,32 @@ void edit_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 		Xoa_khunhap();
 		return;
 	}
+	
 	else {
+
+		if (edit_node->data.danh_sach_ve.n != 0)
+		{
+			PTR_chuyenbay p = phead_dscb;
+			while (p != NULL) {
+
+				if (p != edit_node && p->data.trang_thai != 0 && p->data.trang_thai != 3) {
+					for (int i = 0; i < edit_node->data.danh_sach_ve.n; i++) {
+						for (int j = 0; j < p->data.danh_sach_ve.n; j++) {
+
+							if (strcmp(edit_node->data.danh_sach_ve.so_ghe[i]->cmnd, p->data.danh_sach_ve.so_ghe[j]->cmnd) == 0) {
+								MessageBox(NULL, L"Chuyen bay co Hanh Khach thuoc chuyen bay khac\nKhong the hieu chinh!", L"THONG BAO", MB_ICONHAND | MB_OK);
+								while (kbhit()) getch();
+								Xoa_khunhap();
+								goto nhap_lai;
+							}
+						}
+					}
+				}
+				p = p->pnext;
+			}
+
+		}
+
 		ve_hcnrong(x, y, 66, 18);
 		ve_hcnrong(x + 5, y + 7, 10, 3); ve_hcnrong(x + 15, y + 7, 6, 3); ve_hcnrong(x + 22, y + 7, 6, 3); gotoxy(x + 21, y + 8); cout << ":";
 		ve_hcnrong(x + 5, y + 13, 16, 3); ve_hcnrong(x + 21, y + 13, 6, 3); ve_hcnrong(x + 28, y + 13, 6, 3); ve_hcnrong(x + 35, y + 13, 8, 3);
@@ -2769,6 +2800,7 @@ bool is_the_same_time_30(date_time dt1, date_time dt2) {
 	}
 	return false;
 }
+
 //dat ve
 void order_ve(PTR_chuyenbay& dscb, PTR_chuyenbay cb, ds_ve& danh_sach_ve) {
 	Xoa_khunhap();

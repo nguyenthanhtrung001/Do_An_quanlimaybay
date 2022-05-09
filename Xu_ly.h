@@ -51,6 +51,19 @@ NODE_hanhkhach search_hk(char temp_cmnd[], NODE_hanhkhach& root);
 
 //=============================================== HAM BO TRO ========================================================
 
+//ham tat con tro chuot Console
+void ShowConsoleCursor(bool showFlag)
+{
+	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	CONSOLE_CURSOR_INFO     cursorInfo;
+
+	GetConsoleCursorInfo(out, &cursorInfo);
+	cursorInfo.bVisible = showFlag; // set the cursor visibility
+	SetConsoleCursorInfo(out, &cursorInfo);
+}
+
+
 bool thong_bao_DSMB_0(ds_may_bay ds)
 {
 	if (ds.n == 0)
@@ -104,17 +117,7 @@ void resizeConsole(int width, int height)
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
 	SetConsoleWindowInfo(wHnd, TRUE, &windowSize);
 }
-//ham tat con tro chuot Console
-void ShowConsoleCursor(bool showFlag)
-{
-	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	CONSOLE_CURSOR_INFO     cursorInfo;
-
-	GetConsoleCursorInfo(out, &cursorInfo);
-	cursorInfo.bVisible = showFlag; // set the cursor visibility
-	SetConsoleCursorInfo(out, &cursorInfo);
-}
 void Chuyenmau(int x, int y, int ma_BG, int ma_Kitu, string s) {
 	gotoxy(x, y);
 	SetBGColor(ma_BG);
@@ -807,7 +810,6 @@ void Viet_hoa(char t[]) {
 		}
 	}
 }
-
 int so_luong_tt_1_2(PTR_chuyenbay  dscb)
 {
 	if (dscb == NULL) return 0;
@@ -824,6 +826,10 @@ int so_luong_tt_1_2(PTR_chuyenbay  dscb)
 	return cnt;
 	
 }
+
+
+
+
 
 
 

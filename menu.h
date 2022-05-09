@@ -17,6 +17,7 @@ void Chon_chucnang(){
 		resizeConsole(350, 50);
 		ShowConsoleCursor(false);// tắt con trỏ chuột cốnlde
 		Giaodien_main();// giao diện màng hình chính
+		
 	while(1){
 	    
 		char temp_macb[15] = "";
@@ -28,7 +29,7 @@ void Chon_chucnang(){
 		int i =0;int x=4,ktra;
 		int tmpx = 33;
 		while(!kbhit()){
-			//Logo(7,10);
+			
 			Sleep(200);
 		}
 		i=Nhanphim();

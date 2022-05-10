@@ -788,17 +788,12 @@ void Loading(int x, int y) {
 	SetColor(15);
 	gotoxy(x + 11, y + 9);
 	int j = 1;
-	//	while (j!=39){
-	//		    while(kbhit()) getch();
-	//			cout<<" ";
-	//			if (j>30 && j<=35) Sleep(50);
-	//			else Sleep(20);
-	//			j++;
-	//		}
+	
 	for (; j <= 38; j++) {
 		cout << " ";
+		
 	}
-	Sleep(400);
+	Sleep(500);
 }
 //Ham viet hoa chu cai dau va sau khoang trang
 void Viet_hoa(char t[]) {
@@ -829,6 +824,146 @@ int so_luong_tt_1_2(PTR_chuyenbay  dscb)
 
 
 
+
+
+void xoa_Start() {
+	gotoxy(1, 1);
+	SetBGColor(0);
+	SetColor(0);
+	for (int i = 0; i <= 200; i++)
+	{
+
+		for (int j = 0; j <= 200; j++)
+		{
+			cout << " ";
+		}
+		cout << endl;
+	}
+
+}
+void Loading_start(int x, int y) {
+	
+	system("cls");
+	
+	//	gotoxy(x+25,y+7); cout<<"LOADING...";
+	gotoxy(x + 20, y + 5); cout << endl<<endl;
+	SetColor(15);
+	
+	gotoxy(x + 20, y + 7); cout << "DANG VAO TRANG CHU";
+	ve_hcnrong(x + 10, y + 8, 40, 3);
+	SetBGColor(10);
+	
+	gotoxy(x + 11, y + 9);
+	int j = 1;
+
+	for (; j <= 38; j++) {
+		cout << " ";
+		Sleep(40);
+		if (j == 30) Sleep(400);
+	}
+	
+	Sleep(500);
+	SetBGColor(15);
+	
+	
+}
+void setFontSize(int FontSize)
+{
+	CONSOLE_FONT_INFOEX info = { 0 };
+	info.cbSize = sizeof(info);
+	info.dwFontSize.Y = FontSize; // leave X as zero
+	info.FontWeight = FW_NORMAL;
+	wcscpy(info.FaceName, L"Lucida Console");
+	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), NULL, &info);
+	
+}
+void xuat_chu_mau(string x, int tocdo)
+{
+	ShowConsoleCursor(false);
+	for (int i = 0; i < x.length(); i++)
+	{
+		int tmp = i; if (i == 15) tmp = 0;
+
+		SetColor(19 + i);
+		cout << x[i];
+		
+		Sleep(tocdo);
+
+	}
+	SetColor(0);
+
+}
+void xuat_chu_0_mau(string x, int tocdo)
+{
+	for (int i = 0; i < x.length(); i++)
+	{
+		int tmp = i; if (i == 15) tmp = 0;
+
+
+		cout << x[i];
+		Sleep(tocdo);
+
+	}
+
+
+}
+
+void start()
+{
+	ShowConsoleCursor(false);
+	string trung = "NGUYEN THANH TRUNG";
+	string nghia = "NGUYEN HUU NGHIA";
+	string trieu = "LE TUAN TRIEU";
+	string x = "Nhan Phim Bat Ki De Bat Dau !";
+	//setFontSize(16);
+	gotoxy(45, 3); xuat_chu_0_mau("Chao Mung Ban Den Voi Chung Toi", 5);
+	Sleep(500);
+	gotoxy(47, 5); xuat_chu_0_mau("QUAN LI CHUYEN BAY NOI DIA", 12);
+	gotoxy(58, 7); xuat_chu_0_mau("* * *", 1);
+	Sleep(500);
+
+	int cnt = 9;
+	gotoxy(60, cnt++); xuat_chu_0_mau("Thanh Vien Quan Li", 7); cnt++;
+	Sleep(500);
+	gotoxy(65, cnt++); xuat_chu_0_mau(trung, 5); Sleep(200);
+	gotoxy(65, cnt++); xuat_chu_0_mau(nghia, 5); Sleep(200);
+	gotoxy(65, cnt++); xuat_chu_0_mau(trieu, 5); Sleep(200);
+
+
+	SetColor(10);
+	ve_hcnrong(52 + 3, 17, 15, 5);
+	string ent = " START ";
+	
+	while (true)
+	{
+
+		for (int i = 0; i < ent.length(); i++)
+		{
+			SetColor(19 + i);
+			int tmp = i; if (i == 15) tmp = 0;
+			gotoxy(59 + i, 19);
+			cout << ent[i];
+			gotoxy(59+i+1, 19);
+			cout << " ";
+			Sleep(120);
+			gotoxy(47, 23); xuat_chu_mau(x, 0);
+
+		}
+		
+		int tmp = -1;
+		while (kbhit()) tmp = getch();
+		if (tmp != -1)
+		{
+			
+			Loading_start(40, 5);
+			system("cls");
+			break;
+		}
+
+
+	}
+
+}
 
 
 

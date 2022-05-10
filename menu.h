@@ -14,6 +14,7 @@ void Chon_chucnang(){
 		//thiet lap trang thai chuyen bay
 		update_statement(phead_dscb); // cập nhật trạng thái máy bay
 		//resizeConsole(150,45);// thay đổi kích thước màng hình
+		//setFontSize(16);
 		resizeConsole(350, 50);
 		ShowConsoleCursor(false);// tắt con trỏ chuột cốnlde
 		Giaodien_main();// giao diện màng hình chính

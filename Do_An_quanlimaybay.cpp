@@ -6,7 +6,9 @@
 
 
 int main() {
-	//start();
+	
+	start();
+
 	Chon_chucnang();
 	deleteTree(root_hk);
 	delete_dsmb(dsmb);

@@ -51,6 +51,9 @@ NODE_hanhkhach search_hk(char temp_cmnd[], NODE_hanhkhach& root);
 
 //=============================================== HAM BO TRO ========================================================
 
+
+
+
 //ham tat con tro chuot Console
 void ShowConsoleCursor(bool showFlag)
 {
@@ -62,8 +65,6 @@ void ShowConsoleCursor(bool showFlag)
 	cursorInfo.bVisible = showFlag; // set the cursor visibility
 	SetConsoleCursorInfo(out, &cursorInfo);
 }
-
-
 bool thong_bao_DSMB_0(ds_may_bay ds)
 {
 	if (ds.n == 0)
@@ -74,7 +75,6 @@ bool thong_bao_DSMB_0(ds_may_bay ds)
 	}
 	else return false;
 }
-
 bool thong_bao_DSCB_0(PTR_chuyenbay  dscb)
 {
 	if (dscb==NULL)
@@ -85,7 +85,6 @@ bool thong_bao_DSCB_0(PTR_chuyenbay  dscb)
 	}
 	return false;
 }
-
 bool thong_bao_DSHK_0(NODE_hanhkhach  hk)
 {
 	if (hk == NULL)
@@ -96,7 +95,6 @@ bool thong_bao_DSHK_0(NODE_hanhkhach  hk)
 	}
 	return false;
 }
-
 //Ham xoa thanh cong cu 
 void Xoa_chucnang(int x, int n, string s) {
 	gotoxy(x, 1);
@@ -117,7 +115,6 @@ void resizeConsole(int width, int height)
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
 	SetConsoleWindowInfo(wHnd, TRUE, &windowSize);
 }
-
 void Chuyenmau(int x, int y, int ma_BG, int ma_Kitu, string s) {
 	gotoxy(x, y);
 	SetBGColor(ma_BG);
@@ -127,7 +124,6 @@ void Chuyenmau(int x, int y, int ma_BG, int ma_Kitu, string s) {
 	SetColor(0);
 	gotoxy(x, y);
 }
-
 void Chuyenmau_do( string s) {
 	
 	
@@ -143,7 +139,7 @@ void Chuyenmau_xanh(string s) {
 	SetBGColor(15);
 	SetColor(66);
 	cout << s;
-	SetColor(1);
+	SetColor(0);
 
 }
 
@@ -791,9 +787,11 @@ void Loading(int x, int y) {
 	
 	for (; j <= 38; j++) {
 		cout << " ";
+		Sleep(1);
+
 		
 	}
-	Sleep(500);
+	Sleep(200);
 }
 //Ham viet hoa chu cai dau va sau khoang trang
 void Viet_hoa(char t[]) {
@@ -822,25 +820,6 @@ int so_luong_tt_1_2(PTR_chuyenbay  dscb)
 	
 }
 
-
-
-
-
-void xoa_Start() {
-	gotoxy(1, 1);
-	SetBGColor(0);
-	SetColor(0);
-	for (int i = 0; i <= 200; i++)
-	{
-
-		for (int j = 0; j <= 200; j++)
-		{
-			cout << " ";
-		}
-		cout << endl;
-	}
-
-}
 void Loading_start(int x, int y) {
 	
 	system("cls");
@@ -858,8 +837,8 @@ void Loading_start(int x, int y) {
 
 	for (; j <= 38; j++) {
 		cout << " ";
-		Sleep(40);
-		if (j == 30) Sleep(400);
+		Sleep(13);
+		if (j == 30) Sleep(500);
 	}
 	
 	Sleep(500);
@@ -895,6 +874,7 @@ void xuat_chu_mau(string x, int tocdo)
 }
 void xuat_chu_0_mau(string x, int tocdo)
 {
+	ShowConsoleCursor(false);
 	for (int i = 0; i < x.length(); i++)
 	{
 		int tmp = i; if (i == 15) tmp = 0;
@@ -917,14 +897,15 @@ void start()
 	string x = "Nhan Phim Bat Ki De Bat Dau !";
 	//setFontSize(16);
 	gotoxy(45, 3); xuat_chu_0_mau("Chao Mung Ban Den Voi Chung Toi", 5);
-	Sleep(500);
+	Sleep(450);
 	gotoxy(47, 5); xuat_chu_0_mau("QUAN LI CHUYEN BAY NOI DIA", 12);
 	gotoxy(58, 7); xuat_chu_0_mau("* * *", 1);
-	Sleep(500);
+	Sleep(450);
 
 	int cnt = 9;
 	gotoxy(60, cnt++); xuat_chu_0_mau("Thanh Vien Quan Li", 7); cnt++;
-	Sleep(500);
+	Sleep(400);
+	
 	gotoxy(65, cnt++); xuat_chu_0_mau(trung, 5); Sleep(200);
 	gotoxy(65, cnt++); xuat_chu_0_mau(nghia, 5); Sleep(200);
 	gotoxy(65, cnt++); xuat_chu_0_mau(trieu, 5); Sleep(200);
@@ -964,8 +945,42 @@ void start()
 	}
 
 }
+void chay_thong_bao(int x, int y, string ent)
+{
+	int cnt = 1;
+	while (cnt--)
+	{
+		ShowConsoleCursor(false);
+
+		for (int i = 0; i < ent.length(); i++)
+		{
+			SetColor(1);
+
+			gotoxy(x + i, y);
+			cout << ent[i];
+
+			gotoxy(x + i + 1, y);
+			cout << "                                                                            ";
+			Sleep(8);
 
 
+		}
+		Sleep(250);
+		int tmp = -1;
+		
+	}
+	SetColor(0);
+	Sleep(350);
+	
+}
+
+void xoa_chay_thong_bao(int x, int y)
+{
+		gotoxy(x, y);
+		cout<< "                                                                            ";
+		Sleep(8);
+
+ }
 
 
 
@@ -1045,7 +1060,9 @@ int search_ma_may_bay(ds_may_bay& dsmb, int x, int y) {
 }
 void in_DS_MB(ds_may_bay ds)
 {
+	chay_thong_bao(50, 5, "Sau khi tim thay thong tin tu Bang, Nhan phim Enter de tiep tuc");
 	if (ds.n == 0) return;
+	
 	int x = 4, y = 8, n = 16, j = 3, dem = 1, pageht = 0, page = 0, cd = 0;
 
     Ve_bang(x, y, n, 4, dem);
@@ -1081,11 +1098,16 @@ void in_DS_MB(ds_may_bay ds)
 	if (page == 0) page = 1;
 	if ((ds.n - (page * 15)) > 0) page++;
 	pageht = 1;
+	
 	gotoxy(x + 30, y + 33); cout << pageht << "/" << page;
 	int np = 0;
 	while (1) {
 		np = Nhanphim(); int k = 0;
-		if (np == 27 || np == 13) break;
+		if (np == 27 || np == 13)
+		{
+			xoa_chay_thong_bao(50, 5);
+			break;
+		}
 		if (np == 77 && pageht < page) {// sang phaỉ
 			pageht++;
 			k = 1;
@@ -1196,7 +1218,11 @@ void add_new_MB(ds_may_bay& dsmb) {
 	dsmb.n++;
 
 	ShowConsoleCursor(false);
-	//mau_ban_dau();
+	Loading(x, y);
+	
+	gotoxy(x + 11, y + 9); cout << "          THEM THANH CONG !";
+	Sleep(450);
+	
 	Xoa_khunhap();
 	
 
@@ -1495,6 +1521,7 @@ void sort_chuyen_bay_by_time(PTR_chuyenbay& phead_dscb) {// hien tai- qua khu- t
 	}
 }
 void in_DS_chuyen_bay(PTR_chuyenbay& phead_dscb) {
+
 	node_cb* ptr = new node_cb;
 	ptr = phead_dscb;
 	int x = 4, y = 8, n = 16, j = 3, dem = 1, pageht = 0, page = 0, cd = 0;
@@ -1586,6 +1613,7 @@ void in_DS_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 void in_ten_chuyen_bay(PTR_chuyenbay phead_dscb) {
 	if (phead_dscb == NULL) return;
 	sort_chuyen_bay_by_time(phead_dscb);
+	chay_thong_bao(50, 5, "Sau khi tim thay thong tin tu Bang, Nhan phim Enter de tiep tuc");
 	node_cb* ptr = new node_cb;
 	ptr = phead_dscb;
 	int x = 4, y = 8, n = 16, j = 3, dem = 1, pageht = 0, page = 0, cd = 0;
@@ -1627,7 +1655,11 @@ void in_ten_chuyen_bay(PTR_chuyenbay phead_dscb) {
 	int np = 0;
 	while (1) {
 		np = Nhanphim(); int k = 0;
-		if (np == 27 || np == 13) break;
+		if (np == 27 || np == 13)
+		{
+			xoa_chay_thong_bao(50, 5);
+			break;
+		}
 		if (np == 77 && pageht < page) {
 			pageht++;
 			k = 1;
@@ -1672,6 +1704,7 @@ void in_ten_chuyen_bay(PTR_chuyenbay phead_dscb) {
 void in_ten_chuyen_bay_all(PTR_chuyenbay phead_dscb) {
 	if (phead_dscb == NULL) return;
 	sort_chuyen_bay_by_time(phead_dscb);
+	chay_thong_bao(50, 5, "Sau khi tim thay thong tin tu Bang, Nhan phim Enter de tiep tuc");
 	node_cb* ptr = new node_cb;
 	ptr = phead_dscb;
 	int x = 4, y = 8, n = 16, j = 3, dem = 1, pageht = 0, page = 0, cd = 0;
@@ -1713,7 +1746,11 @@ void in_ten_chuyen_bay_all(PTR_chuyenbay phead_dscb) {
 	int np = 0;
 	while (1) {
 		np = Nhanphim(); int k = 0;
-		if (np == 27 || np == 13) break;
+		if (np == 27 || np == 13)
+		{
+			xoa_chay_thong_bao(50, 5);
+			break;
+		}
 		if (np == 77 && pageht < page) {
 			pageht++;
 			k = 1;

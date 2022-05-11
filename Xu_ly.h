@@ -52,7 +52,24 @@ NODE_hanhkhach search_hk(char temp_cmnd[], NODE_hanhkhach& root);
 //=============================================== HAM BO TRO ========================================================
 
 
+bool  check_cmnd_0(char cmnd[])
+{
+	gotoxy(5, 5);
+	int sum = 0;
+	for (int i = 0; i <9 ; i++)
+	{
+		sum += (int)(cmnd[i] - '0');
+		
 
+	}
+	
+	
+	
+	
+		
+	if (sum == 0) return true;
+	return false;
+}
 
 //ham tat con tro chuot Console
 void ShowConsoleCursor(bool showFlag)
@@ -3002,9 +3019,11 @@ void order_ve(PTR_chuyenbay& dscb, PTR_chuyenbay cb, ds_ve& danh_sach_ve) {
 		gotoxy(x + 6, y + 5); cout << "  CMND :                                            ";
 		ShowConsoleCursor(true);
 		do {
+			
 			ktra = 3;
 			Nhan_chu(temp_cmnd, x + 14, y + 5, 9, ktra);
-		} while (strlen(temp_cmnd) == 0 || strlen(temp_cmnd) < 9);
+			
+		} while (strlen(temp_cmnd) == 0 || strlen(temp_cmnd) < 9|| check_cmnd_0(temp_cmnd));
 		ShowConsoleCursor(false);
 
 

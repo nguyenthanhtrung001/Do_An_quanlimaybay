@@ -18,6 +18,7 @@ void Chon_chucnang(){
 		resizeConsole(350, 50);
 		ShowConsoleCursor(false);// tắt con trỏ chuột cốnlde
 		Giaodien_main();// giao diện màng hình chính
+
 		
 	while(1){
 	    
@@ -772,6 +773,7 @@ void Chon_chucnang(){
 										SetBGColor(15);
 										ShowConsoleCursor(false);
 										check=search_node(phead_dscb,temp_macb);
+
 										if (check!=NULL && check->data.trang_thai == 0){
 											int result = MessageBox(NULL,L"Chuyen bay da bi huy\n Ban co muon nhap lai",L"THONG BAO",MB_ICONWARNING|MB_OKCANCEL);
 											while(kbhit()) getch();

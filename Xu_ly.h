@@ -1569,7 +1569,9 @@ void in_DS_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 	while (ptr != NULL) {
 		cd++;
 		if (cd <= 15) {
-			gotoxy(x + 6, y + j); cout << ptr->data.macb; gotoxy(x + 26, y + j); cout << ptr->data.so_hieu_may_bay; gotoxy(x + 46, y + j); cout << ptr->data.san_bay_den;
+			gotoxy(x + 6, y + j); cout << ptr->data.macb; 
+			gotoxy(x + 26, y + j); cout << ptr->data.so_hieu_may_bay;
+			gotoxy(x + 46, y + j); cout << ptr->data.san_bay_den;
 			gotoxy(x + 66, y + j); cout << ptr->data.depart_time.hour << ":" << ptr->data.depart_time.min << "  " << ptr->data.depart_time.day << "/"
 				<< ptr->data.depart_time.mon << "/" << ptr->data.depart_time.year;
 			gotoxy(x + 92, y + j); cout << ptr->data.trang_thai;
@@ -1581,7 +1583,7 @@ void in_DS_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 	if (page == 0) page = 1;
 	if ((cd - (page * 15)) > 0) page++;
 	pageht = 1;
-	gotoxy(x + 43, y + 33); cout << pageht << "/" << page;
+	gotoxy(x + 43+10, y + 33); cout << pageht << "/" << page;
 	int np = 0;
 	while (1) {
 		np = Nhanphim(); int k = 0;
@@ -1622,7 +1624,7 @@ void in_DS_chuyen_bay(PTR_chuyenbay& phead_dscb) {
 				}
 				ptr = ptr->pnext;
 			}
-			gotoxy(x + 43, y + 33); cout << pageht << "/" << page;
+			gotoxy(x + 43+10, y + 33); cout << pageht << "/" << page;
 		}
 	}
 	Xoa_khunhap();
@@ -1794,7 +1796,7 @@ void in_ten_chuyen_bay_all(PTR_chuyenbay phead_dscb) {
 			ptr = phead_dscb;
 			while (ptr != NULL) {
 				cd++;
-				if (cd <= pageht * 15 && cd >= dem && ptr->data.trang_thai != 0) {
+				if (cd <= pageht * 15 && cd >= dem ) {
 
 					gotoxy(x + 6, y + j); cout << ptr->data.macb;
 					gotoxy(x + 26, y + j);  cout << ptr->data.depart_time.hour << ":" << ptr->data.depart_time.min << "  " << ptr->data.depart_time.day << "/"
@@ -3480,9 +3482,9 @@ void in_DSCB_Day_place(PTR_chuyenbay& phead_dscb) {
 		} while (temp_mon == 0 || temp_mon > 12);
 
 		do {
-			temp_year = 2020, ktra = 0;
+			temp_year = 2022, ktra = 0;
 			Nhan_so(temp_year, x + 41, y + 5, 4, ktra);
-		} while (temp_year == 0 || temp_year < 2020);
+		} while (temp_year == 0 || temp_year < 2022);
 
 		date_time check;
 		check.day = temp_day;

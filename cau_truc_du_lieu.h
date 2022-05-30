@@ -43,6 +43,7 @@ struct ds_ve{
 	ve **so_ghe;//khoi tao bang so_cho cua may bay.
 	int n;//so ve da duoc dat.
 	int limit;// so phan tu toi da!
+	
 };
 
 

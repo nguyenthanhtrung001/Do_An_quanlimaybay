@@ -3594,17 +3594,14 @@ void print_so_luot_thuc_hien(ds_may_bay& dsmb)
 		dsmb.data[i] = dsmb.data[temp_index];
 		dsmb.data[temp_index] = temp_mb;
 	}
-	int x = 12, y = 8; int n1 = 16, j = 3, dem = 1, np = 0, page = 0, pageht = 0;
-	
-	Ve_bang(x, y, n1, 5, dem);
+	int x = 12+20, y = 8-2; int n1 = 16, j = 3, dem = 1, np = 0, page = 0, pageht = 0;
+	Ve_bang(x, y, n1, 4, dem);
 	SetBGColor(1);
 	SetColor(15);
-	
 	gotoxy(x + 1, y + 1); cout << "STT";
 	gotoxy(x + 8, y + 1); cout << "SO HIEU MAY BAY";
 	gotoxy(x + 26, y + 1); cout << "SO LUOT THUC HIEN";
-	gotoxy(x + 48, y + 1); cout << "TRANG THAI";
-	gotoxy(x + 68, y + 1); cout << "SO LUONG GHE";
+	gotoxy(x + 48, y + 1);  cout << "SO LUONG GHE";
 	
 	SetBGColor(15);
 	SetColor(0);
@@ -3612,15 +3609,14 @@ void print_so_luot_thuc_hien(ds_may_bay& dsmb)
 		if (i >= dsmb.n) break;
 		gotoxy(x + 9, y + j); cout << dsmb.data[i]->so_hieu_may_bay;
 		gotoxy(x + 30, y + j); cout << dsmb.data[i]->so_luot_thuc_hien;
-		
-		gotoxy(x + 68, y + j); cout << dsmb.data[i]->socho;
+		gotoxy(x + 51, y + j); cout << dsmb.data[i]->socho;
 		j += 2;
 	}
 	page = dsmb.n / 15;
 	if ((dsmb.n - (page * 15)) > 0) page++;
 	if (page == 0) page = 1;
 	pageht = 1;
-	gotoxy(x + 35, y + 33); cout << pageht << "/" << page;
+	gotoxy(x + 30, y + 33); cout << pageht << "/" << page;
 	ShowConsoleCursor(false);
 	while (1) {
 		np = Nhanphim();
@@ -3638,11 +3634,12 @@ void print_so_luot_thuc_hien(ds_may_bay& dsmb)
 		}
 		if (k == 1) {
 
-			Ve_bang(x, y, n1, 5, dem);
+			Ve_bang(x, y, n1, 4, dem);
 			SetBGColor(1);
 			SetColor(15);
 			gotoxy(x + 1, y + 1); cout << "STT"; gotoxy(x + 8, y + 1); cout << "SO HIEU MAY BAY"; gotoxy(x + 26, y + 1); cout << "SO LUOT THUC HIEN";
-			gotoxy(x + 48, y + 1); cout << "TRANG THAI"; gotoxy(x + 68, y + 1); cout << "SO LUONG GHE";
+			
+			gotoxy(x + 48, y + 1); cout << "SO LUONG GHE";
 			SetBGColor(15);
 			SetColor(0);
 			j = 3;
@@ -3650,11 +3647,10 @@ void print_so_luot_thuc_hien(ds_may_bay& dsmb)
 			for (int i = dem - 1; i < pageht * 15; i++) {
 				if (i >= dsmb.n) break;
 				gotoxy(x + 9, y + j); cout << dsmb.data[i]->so_hieu_may_bay; gotoxy(x + 30, y + j); cout << dsmb.data[i]->so_luot_thuc_hien;
-			
-				gotoxy(x + 68, y + j); cout << dsmb.data[i]->socho;
+				gotoxy(x + 51, y + j); cout << dsmb.data[i]->socho;
 				j += 2;
 			}
-			gotoxy(x + 35, y + 33); cout << pageht << "/" << page;
+			gotoxy(x + 30, y + 33); cout << pageht << "/" << page;
 		}
 	}
 	ShowConsoleCursor(false);

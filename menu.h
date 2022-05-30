@@ -29,11 +29,11 @@ void Chon_chucnang(){
 		
 		int i =0;int x=4,ktra;
 		int tmpx = 33;
-		while(!kbhit()){
-			
+		while (!kbhit()) {
+
 			Sleep(200);
 		}
-		i=Nhanphim();
+		i = Nhanphim();
 		
 		if (i!=27)
 		{

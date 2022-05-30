@@ -160,7 +160,7 @@ void Chuyenmau_xanh(string s) {
 
 }
 
-
+	
 void Ve_congcu(int x, string s) {
 	SetBGColor(1); SetColor(0);
 	gotoxy(x, 1);
@@ -1437,7 +1437,7 @@ bool check_12h_chuyen_bay(PTR_chuyenbay& phead_dscb, char temp_so_hieu[], date_t
 			// chênh lệch năm-> chyển đổi tháng-> chênh lệch 1 ngày
 			else if (abs(ptr->data.depart_time.year - dt.year) == 1) {
 				if (ptr->data.depart_time.day == 31 && ptr->data.depart_time.mon == 12 && dt.day == 1 && dt.mon == 1) {
-					if ((1440 - (ptr->data.depart_time.hour * 60 + ptr->data.depart_time.min) + (dt.hour * 60 + dt.min)) < 1880) {
+					if ((1440 - (ptr->data.depart_time.hour * 60 + ptr->data.depart_time.min) + (dt.hour * 60 + dt.min)) < 720) {
 						return false;
 					}
 				}
@@ -1650,7 +1650,7 @@ void in_ten_chuyen_bay(PTR_chuyenbay phead_dscb) {
 	
 	while (ptr != NULL) {
 		cd++;
-		if (cd <= 15 && ptr->data.trang_thai != 0) {
+		if (cd <= 15 && ptr->data.trang_thai != 0 && ptr->data.trang_thai != 3) {
 			
 
 				gotoxy(x + 6, y + j); cout << ptr->data.macb;
@@ -1702,7 +1702,7 @@ void in_ten_chuyen_bay(PTR_chuyenbay phead_dscb) {
 			ptr = phead_dscb;
 			while (ptr != NULL) {
 				cd++;
-				if (cd <= pageht * 15 && cd >= dem && ptr->data.trang_thai != 0) {
+				if (cd <= pageht * 15 && cd >= dem && ptr->data.trang_thai != 0 && ptr->data.trang_thai != 3) {
 
 					gotoxy(x + 6, y + j); cout << ptr->data.macb;
 					gotoxy(x + 26, y + j);  cout << ptr->data.depart_time.hour << ":" << ptr->data.depart_time.min << "  " << ptr->data.depart_time.day << "/"
@@ -1973,7 +1973,7 @@ void add_new_ch_bay(PTR_chuyenbay& phead_dscb, ds_may_bay dsmb) {
 		}
 
 		if (check_12h_chuyen_bay(phead_dscb, temp_so_hieu, depart) == false) {
-			MessageBox(NULL, L"Trong 2 gio, mot may bay khong the thuc hien 2 chuyen bay khac nhau!\n\tNhap lai!",L"THONG BAO", MB_ICONWARNING | MB_OK);
+			MessageBox(NULL, L"Trong 12 gio, mot may bay khong the thuc hien 2 chuyen bay khac nhau!\n\tNhap lai!",L"THONG BAO", MB_ICONWARNING | MB_OK);
 			while (kbhit()) getchar();
 			exit = false;
 		}
@@ -3266,7 +3266,7 @@ void ve_gioithieu(int n, int m)
 	gotoxy(7, 41); cout << "          Nhan Phim"; Chuyenmau_do(" Left / Right");cout<< " (trai / phai) de lua chon cac thanh chuc nang khac";
 	gotoxy(10, 42); cout << "Esc : Thoat";
 	
-	//	gotoxy(50,42);cout<<"F2: Luu";
+	
 	SetBGColor(15);
 	SetColor(0);
 }
@@ -3595,29 +3595,24 @@ void print_so_luot_thuc_hien(ds_may_bay& dsmb)
 		dsmb.data[temp_index] = temp_mb;
 	}
 	int x = 12, y = 8; int n1 = 16, j = 3, dem = 1, np = 0, page = 0, pageht = 0;
-	ve_hcnrong(x + 98, y, 25, 8);
+	
 	Ve_bang(x, y, n1, 5, dem);
 	SetBGColor(1);
 	SetColor(15);
-	gotoxy(x + 99, y + 1); cout << "       TRANG THAI      ";
+	
 	gotoxy(x + 1, y + 1); cout << "STT";
 	gotoxy(x + 8, y + 1); cout << "SO HIEU MAY BAY";
 	gotoxy(x + 26, y + 1); cout << "SO LUOT THUC HIEN";
 	gotoxy(x + 48, y + 1); cout << "TRANG THAI";
 	gotoxy(x + 68, y + 1); cout << "SO LUONG GHE";
-	SetBGColor(10);
-	SetColor(0);
-	gotoxy(x + 99, y + 3); cout << "  1 : HOAT DONG        ";
-	SetBGColor(4);
-	SetColor(15);
-	gotoxy(x + 99, y + 5); cout << "  0 : KHONG HOAT DONG  ";
+	
 	SetBGColor(15);
 	SetColor(0);
 	for (int i = 0; i < 15; i++) {
 		if (i >= dsmb.n) break;
 		gotoxy(x + 9, y + j); cout << dsmb.data[i]->so_hieu_may_bay;
 		gotoxy(x + 30, y + j); cout << dsmb.data[i]->so_luot_thuc_hien;
-		gotoxy(x + 51, y + j); cout << (dsmb.data[i]->active == true ? "1" : "0");
+		
 		gotoxy(x + 68, y + j); cout << dsmb.data[i]->socho;
 		j += 2;
 	}
@@ -3655,7 +3650,8 @@ void print_so_luot_thuc_hien(ds_may_bay& dsmb)
 			for (int i = dem - 1; i < pageht * 15; i++) {
 				if (i >= dsmb.n) break;
 				gotoxy(x + 9, y + j); cout << dsmb.data[i]->so_hieu_may_bay; gotoxy(x + 30, y + j); cout << dsmb.data[i]->so_luot_thuc_hien;
-				gotoxy(x + 51, y + j); cout << (dsmb.data[i]->active == true ? "1" : "0"); gotoxy(x + 68, y + j); cout << dsmb.data[i]->socho;
+			
+				gotoxy(x + 68, y + j); cout << dsmb.data[i]->socho;
 				j += 2;
 			}
 			gotoxy(x + 35, y + 33); cout << pageht << "/" << page;

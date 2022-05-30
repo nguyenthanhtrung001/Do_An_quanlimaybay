@@ -90,7 +90,7 @@ typedef node_cb*PTR_chuyenbay;
  
  struct node_hk{
  	hanh_khach data;	
- 	int bf=0;//chi so can bang cua nut hien tai.
+ 	
  	node_hk *right=NULL;
  	node_hk *left=NULL;
  };

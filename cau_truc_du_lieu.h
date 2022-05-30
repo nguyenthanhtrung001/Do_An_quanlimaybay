@@ -23,8 +23,7 @@ struct may_bay{
 	//CHI SO PHU: so luot thuc hien
 	int so_luot_thuc_hien=0;
 	
-	//CHI SO PHU: active
-	bool active=true;
+	
 	
 };
 

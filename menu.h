@@ -1174,6 +1174,8 @@ void Chon_chucnang(){
 										if(check!=NULL){
 											Xoa_khunhap();
 											print_empty_ve(check->data.danh_sach_ve,temp_macb);
+											
+											
 										}
 										else{
 											int result = MessageBox(NULL,L"Ma chuyen bay khong ton tai\n Ban co muon nhap lai",L"THONG BAO",MB_ICONWARNING|MB_OKCANCEL);

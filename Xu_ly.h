@@ -1000,6 +1000,123 @@ void xoa_chay_thong_bao(int x, int y)
  }
 
 
+void ve_khung_ve(int x, int y, int k, int bg, int col)
+{
+	
+	
+	SetBGColor(bg);
+	gotoxy(x + 1, y + 1);
+	cout << "     ";
+	SetColor(col);
+	gotoxy(x + 1, y + 1); cout << " " << k << " ";
+	
+
+
+}
+
+void in_ten_ve_trong(ds_ve ds) {
+
+	chay_thong_bao(50, 5, "Sau khi tim thay thong tin tu Bang, Nhan phim Enter de tiep tuc");
+
+	SetBGColor(10);
+	SetColor(0);
+	gotoxy(3,7); cout << "  CON VE  ";
+	SetBGColor(4);
+	SetColor(15);
+	gotoxy(3, 8); cout << "  HET VE  ";
+
+	SetBGColor(15);
+	SetColor(0);
+
+	int color;
+	
+
+	int  n = 16, j = 3, dem = 1, pageht = 0, page = 0, cd = 0;
+
+	int y = 9;
+	int k = 0;
+	ve_hcnrong(3, 10, 65, 23);
+	
+	
+	for (int i = 1; i <= ds.limit && i<=100; i++)
+	{
+		if (check_empty_ve(ds, i)==true) color = 2;
+		else color = 4;
+		if (i % 10 == 1) {
+			k = 0;
+			y += 2;
+		}
+		ve_khung_ve(5 + k, y,i, color, 0);
+		//ve_hcnrong(5+k, y, 7, 3);
+		k = k + 6;
+
+	}
+	cout << endl << endl;
+	SetBGColor(15);
+	SetColor(0);
+
+	//......................
+	page = ds.limit / 100;
+	if (page == 0) page = 1;
+	if ((ds.limit - (page * 100)) > 0) page++;
+	pageht = 1;
+	gotoxy(33, 33); cout << pageht << "/" << page; ShowConsoleCursor(false);
+	int np = 0;
+	while (1) {
+		np = Nhanphim(); int k = 0;
+		if (np == 27 || np == 13)
+		{
+			xoa_chay_thong_bao(50, 5);
+			break;
+		}
+		if (np == 77 && pageht < page) {
+			pageht++;
+			k = 1;
+		}
+		if (np == 75 && pageht > 1) {
+			pageht--;
+			k = 1;
+		}
+		if (k == 1) {
+			cd = 0;
+			dem = pageht * 100 - 99;
+
+
+			SetBGColor(15);
+			SetColor(0);
+
+			y = 9;
+			k = 0;
+			ve_hcnrong(3, 10, 65, 23);
+			for (int i = dem; i <= ds.limit && i <= pageht * 100; i++)
+			{
+				if (check_empty_ve(ds, i) == true) color = 2;
+				else color = 4;
+				if (i % 10 == 1) {
+					k = 0;
+					y += 2;
+				}
+				ve_khung_ve(5 + k, y, i, color, 0);
+				
+				k = k + 6;
+
+			}
+			cout << endl << endl;
+			
+
+
+			SetBGColor(15);
+			SetColor(0);
+
+
+
+			gotoxy(33, 33); cout << pageht << "/" << page;
+		}
+	}
+	ShowConsoleCursor(false);
+	
+
+}
 
 
 
@@ -3097,8 +3214,12 @@ void order_ve(PTR_chuyenbay& dscb, PTR_chuyenbay cb, ds_ve& danh_sach_ve) {
 		}
 	}
 
+
+	
 	while (true) {
 		Xoa_khunhap();
+		in_ten_ve_trong(danh_sach_ve);
+		x += 35;
 		ve_hcnrong(x, y, 64, 18);
 		ve_hcnrong(x + 5, y + 4, 54, 3);
 		SetBGColor(14);
@@ -3171,8 +3292,7 @@ void remove_ve(ds_ve& danh_sach_ve) {
 
 	ShowConsoleCursor(false);
 	Xoa_khunhap();
-	Loading(x, y);
-	Xoa_khunhap();
+	
 	for (int i = 0; i < danh_sach_ve.n; i++) {
 		if (strcmp(temp_cmnd, danh_sach_ve.so_ghe[i]->cmnd) == 0) {
 			ve_hcnrong(x, y, 64, 18);
@@ -3199,6 +3319,7 @@ void remove_ve(ds_ve& danh_sach_ve) {
 				MessageBox(NULL, L"XOA VE THANH CONG !", L"THONG BAO", MB_ICONINFORMATION | MB_OK);
 				danh_sach_ve.n--;
 				while (kbhit()) getch();
+
 				Xoa_khunhap();
 				return;
 			}
